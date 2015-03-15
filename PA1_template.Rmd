@@ -7,12 +7,31 @@ keep_md: true
 ---
 
 ## Loading and preprocessing the data
-
-
+Records with missing data **NA** are removed from the set
+```{r}
+data <- read.csv("activity.csv", colClasses = c("numeric", "Date", "numeric"))
+data <- na.omit(data)
+```
 
 ## What is mean total number of steps taken per day?
+Check Library is Loaded
+```{r}
+require(ggplot2)
+```
 
+Calculate the Steps per day
+```{r}
+steps_per_day <- aggregate(steps ~ date, data, sum)
+```
 
+Construct a histogram. Breaks are set to **25**
+```{r}
+hist(steps_per_day$steps, 
++      breaks = 25,
++      main = "Frequency of Number of Steps Per Day",
++      xlab = "Number of steps",
++      col = "#008888")
+```
 
 ## What is the average daily activity pattern?
 

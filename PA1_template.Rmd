@@ -14,7 +14,7 @@ data <- na.omit(data)
 ```
 
 ## What is mean total number of steps taken per day?
-Check Library is Loaded
+Check if *ggplot2* Library is Loaded
 ```{r}
 require(ggplot2)
 ```
@@ -25,12 +25,12 @@ steps_per_day <- aggregate(steps ~ date, data, sum)
 ```
 
 Construct a histogram. Breaks are set to **25**
-```{r}
-hist(steps_per_day$steps, 
-+      breaks = 25,
-+      main = "Frequency of Number of Steps Per Day",
-+      xlab = "Number of steps",
-+      col = "#008888")
+```{r, echo = TRUE}
+hist(steps_per_day$steps,
+     breaks = 25,
+     main = "Frequency of Number of Steps Per Day",
+     xlab = "Number of steps",
+     col = "#008888")
 ```
 
 ## What is the average daily activity pattern?

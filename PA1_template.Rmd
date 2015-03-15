@@ -59,6 +59,13 @@ ggplot(interval, aes(x=interval,y=steps)) +
 interval[interval$steps==max(interval$steps),1]
 ```
 
+
+## Imputing missing values
+* Number of NA (missing) step values in the dataset
+```{r}
+sum(is.na(all_data))
+```
+
 * Strategy for filling in all of the missing values
 Missing step values (NA) were replaced by the mean number of steps taken
 
@@ -80,14 +87,53 @@ hist(newtotal$steps,
      col = "#cc0088")
 ```
 
+**Do these values differ from the estimates from the first part of the assignment?**
 
-## Imputing missing values
-* Number of NA (missing) step values in the dataset
+* Mean of the total number of steps taken per day
 ```{r}
-sum(is.na(all_data))
-```
+mean(newtotal$steps)
 
+````
+
+* Median of the total number of steps taken per day
+```{r}
+median(newtotal$steps)
+
+````
 
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
+* Create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
+
+```{r}
+weekend <- weekdays(as.Date(data$date)) %in% c("Saturday", "Sunday")
+data$daytype <- "weekday"
+data$daytype[weekend == TRUE] <- "weekend"
+data$daytype <- as.factor(data$daytype)
+
+## Show head of dataset adter adding weekend/weekday
+head(data)
+```
+
+* Make a panel plot containing a time series plot
+
+*Make sure lattice library is loaded*
+```{r}
+require(lattice)
+```
+
+Construct the Plot
+```{r}
+timeplot <- aggregate(steps ~ interval + daytype, data, mean)
+xyplot(
+      steps ~ interval | daytype,
+      timeplot,
+      type = "l",
+      layout = c(1,2),
+      main = "Time Series Plot of the 5-Minute Interval",
+      xlab = "5-Minute Interval",
+      ylab = "Average Number of Steps Taken"
+)
+```

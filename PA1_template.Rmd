@@ -19,13 +19,13 @@ Check if *ggplot2* Library is Loaded
 require(ggplot2)
 ```
 
-Calculate the Steps per day
+* Calculate the Steps per day
 ```{r}
 steps_per_day <- aggregate(steps ~ date, data, sum)
 ```
 
-Construct a histogram. Breaks are set to **25**
-```{r, echo = TRUE}
+* Construct a histogram. Breaks are set to **25**
+```{r}
 hist(steps_per_day$steps,
      breaks = 25,
      main = "Frequency of Number of Steps Per Day",
@@ -33,8 +33,24 @@ hist(steps_per_day$steps,
      col = "#008888")
 ```
 
-## What is the average daily activity pattern?
+* Mean of the total number of steps taken per day
+```{r}
+mean(steps_per_day$steps)
 
+````
+
+* Median of the total number of steps taken per day
+```{r}
+median(steps_per_day$steps)
+
+````
+
+
+## What is the average daily activity pattern?
+```{r}
+interval <- aggregate(steps ~ interval, data, mean)
+ggplot(interval, aes(x=interval,y=steps)) + geom_line(color="#0088aa") + labs(x="Interval",y="Average Number of Steps")
+```
 
 
 ## Imputing missing values

@@ -1,10 +1,10 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
+author: "PM02"
+date: "Sunday, March 10, 2015"
+output: html_document
+keep_md: true
 ---
-
 
 ## Loading and preprocessing the data
 

@@ -9,8 +9,8 @@ keep_md: true
 ## Loading and preprocessing the data
 Records with missing data **NA** are removed from the set
 ```{r}
-data <- read.csv("activity.csv", colClasses = c("numeric", "Date", "numeric"))
-data <- na.omit(data)
+all_data <- read.csv("activity.csv", colClasses = c("numeric", "Date", "numeric"))
+data <- na.omit(all_data)
 ```
 
 ## What is mean total number of steps taken per day?
@@ -49,11 +49,23 @@ median(steps_per_day$steps)
 ## What is the average daily activity pattern?
 ```{r}
 interval <- aggregate(steps ~ interval, data, mean)
-ggplot(interval, aes(x=interval,y=steps)) + geom_line(color="#0088aa") + labs(x="Interval",y="Average Number of Steps")
+ggplot(interval, aes(x=interval,y=steps)) +
+  geom_line(color="#0088aa") +
+  labs(x="5 Minute Interval",y="Average Number of Steps")
+```
+
+* Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+```{r}
+interval[interval$steps==max(interval$steps),1]
 ```
 
 
 ## Imputing missing values
+* Number of NA (missing) step values in the dataset
+```{r}
+sum(is.na(all_data))
+```
+
 
 
 

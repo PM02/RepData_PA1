@@ -59,6 +59,16 @@ ggplot(interval, aes(x=interval,y=steps)) +
 interval[interval$steps==max(interval$steps),1]
 ```
 
+* Strategy for filling in all of the missing values
+Missing step values (NA) were replaced by the mean number of steps taken
+
+* New Dataset with missing data filled in
+```{r}
+## merge original activity data frame with interval data frame
+newdata <- merge(all_data, interval, by = 'interval', all.y = F)
+colnames(newdata) <- c("interval", "steps", "date", "meansteps")
+```
+
 
 ## Imputing missing values
 * Number of NA (missing) step values in the dataset

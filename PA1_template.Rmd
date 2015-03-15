@@ -62,11 +62,22 @@ interval[interval$steps==max(interval$steps),1]
 * Strategy for filling in all of the missing values
 Missing step values (NA) were replaced by the mean number of steps taken
 
+
 * New Dataset with missing data filled in
 ```{r}
 ## merge original activity data frame with interval data frame
 newdata <- merge(all_data, interval, by = 'interval', all.y = F)
 colnames(newdata) <- c("interval", "steps", "date", "meansteps")
+```
+
+* Histogram of the total number of steps taken per day with imputed values
+```{r}
+newtotal <- aggregate(steps ~ date, newdata, sum, na.rm = TRUE)
+hist(newtotal$steps,
+     breaks = 20,
+     main = "Frequency of Number of Steps Per Day",
+     xlab = "Number of steps",
+     col = "#cc0088")
 ```
 
 

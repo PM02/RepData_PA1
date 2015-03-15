@@ -125,7 +125,7 @@ require(lattice)
 ```
 
 Construct the Plot
-```{r}
+```{r, echo=TRUE, fig.show='asis',results='asis'}
 timeplot <- aggregate(steps ~ interval + daytype, data, mean)
 xyplot(
       steps ~ interval | daytype,
